@@ -43,6 +43,9 @@ try {
         (new Factory())->createResponse(404)->withBody(Rancoud\Http\Message\Stream::create('404'))->send();
     }
 } catch (\Throwable $t) {
+    if ($env->get('DEBUG') === true) {
+        var_dump(gmdate("Y-m-d H:i:s", time()) . "\t" . $request->getMethod() . "\t" . $request->getUri() . "\t" . $t->getMessage() . "\t" . $t->getTraceAsString() . "\n");
+    }
     // phpcs:disable
     echo <<<HTML
 <!DOCTYPE html>
